@@ -23,12 +23,12 @@
 
 ```js
 window.onload = function(){
-  var head = document.getElementByTagName('head')[0];
+  var head = document.getElementsByTagName('head')[0];
   var fbScript = document.createElement('script');
   fbScript.type = 'text/javascript';
   fbScript.async = true;
-  fbScript.src = '/fallback.js?v='+Date.now();
-  fbScript.onload  = function(){
+  fbScript.src = '/fallback.js?v=' + Date.now();
+  fbScript.onload = function() {
     if (navigator && navigator.serviceWorker) {
       if (window.__SW_DISABLED__) {
         navigator.serviceWorker.getRegistration('/').then(function(reg) {
@@ -37,5 +37,6 @@ window.onload = function(){
       }
     }
   };
+  head.appendChild(fbScript);
 };
 ```
