@@ -22,19 +22,18 @@
 ## inline solution <index.html>
 
 ```js
-window.onload = function(){
+window.onload = function() {
   var head = document.getElementsByTagName('head')[0];
   var fbScript = document.createElement('script');
   fbScript.type = 'text/javascript';
   fbScript.async = true;
+  // this url MUST NOT BE mgt by sw.js
   fbScript.src = '/fallback.js?v=' + Date.now();
   fbScript.onload = function() {
-    if (navigator && navigator.serviceWorker) {
-      if (window.__SW_DISABLED__) {
-        navigator.serviceWorker.getRegistration('/').then(function(reg) {
-          reg && reg.unregister();
-        });
-      }
+    if (navigator && navigator.serviceWorker && window.__SW_DISABLED__) {
+      navigator.serviceWorker.getRegistration('/').then(function(reg) {
+        reg && reg.unregister();
+      });
     }
   };
   head.appendChild(fbScript);
