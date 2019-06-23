@@ -27,7 +27,7 @@ window.onload = function() {
   var fbScript = document.createElement('script');
   fbScript.type = 'text/javascript';
   fbScript.async = true;
-  // this url MUST NOT BE mgt by sw.js
+  // this url MUST NOT BE cached by sw.js
   fbScript.src = '/fallback.js?v=' + Date.now();
   fbScript.onload = function() {
     if (navigator && navigator.serviceWorker && window.__SW_DISABLED__) {
