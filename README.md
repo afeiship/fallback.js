@@ -31,6 +31,7 @@ window.onload = function() {
   fbScript.src = '/fallback.js?v=' + Date.now();
   fbScript.onload = function() {
     if (navigator && navigator.serviceWorker && window.__SW_DISABLED__) {
+      console.log('[ 😂Cache has clean! ]');
       navigator.serviceWorker.getRegistration('/').then(function(reg) {
         reg && reg.unregister();
       });
